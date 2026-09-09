@@ -37,7 +37,7 @@ else:
 if kind == 'S':
 	outfilename = "slides."+chap+".pdf"
 	shutil.copy("slide.pdf","slides/" + outfilename)
-	shutil.copy("slide.pdf","slides.pdf")
+	# shutil.copy("slide.pdf","slides.pdf")
 else:
 	if kind == 'H':
 		outfilename = "notes."+chap+".pdf"
