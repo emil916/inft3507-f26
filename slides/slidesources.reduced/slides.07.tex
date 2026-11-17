@@ -96,7 +96,7 @@
   \onslide
   \begin{block}{Example execution sequences}
     \begin{centerfig}
-      \includefigure{07-05}
+      \includefigure[0.135]{07-05}
     \end{centerfig}
   \end{block}
 \end{slide}
@@ -173,14 +173,15 @@
     \end{centerfig}
     \begin{exampleblock}{A number of schedules}
       \begin{centerfig}
-        \sffamily\footnotesize
-        \begin{tabular}{|l|llllll|l|}\hline
-          & \multicolumn{6}{c|}{Time \mathexpr{\longrightarrow}} & \\ \hline
-          S1 & x = 0 & x = x + 1 & x = 0     & x = x + 2 & x = 0     & x = x + 3 & \blue{Legal}   \\
-          S2 & x = 0 & x = 0     & x = x + 1 & x = x + 2 & x = 0     & x = x + 3 & \blue{Legal}   \\
-          S3 & x = 0 & x = 0     & x = x + 1 & x = 0     & x = x + 2 & x = x + 3 & \red{Illegal} \\
-          S4 & x = 0 & x = 0     & x = x + 3 & x = 0     & x = x + 1 & x = x + 2 & \red{Illegal} \\ \hline
-        \end{tabular}
+        % \sffamily\footnotesize
+        % \begin{tabular}{|l|llllll|l|}\hline
+        %   & \multicolumn{6}{c|}{Time \mathexpr{\longrightarrow}} & \\ \hline
+        %   S1 & x = 0 & x = x + 1 & x = 0     & x = x + 2 & x = 0     & x = x + 3 & \blue{Legal}   \\
+        %   S2 & x = 0 & x = 0     & x = x + 1 & x = x + 2 & x = 0     & x = x + 3 & \blue{Legal}   \\
+        %   S3 & x = 0 & x = 0     & x = x + 1 & x = 0     & x = x + 2 & x = x + 3 & \red{Illegal} \\
+        %   S4 & x = 0 & x = 0     & x = x + 3 & x = 0     & x = x + 1 & x = x + 2 & \red{Illegal} \\ \hline
+        % \end{tabular}
+        \includefigure[0.2]{07-13}
       \end{centerfig}
     \end{exampleblock}
   \end{slide}
@@ -214,12 +215,12 @@
 \subsection{Eventual consistency}
 \begin{slide}{Eventual consistency}
   \begin{block}{Definition}
-    Consider a collection of data stores and (concurrent) write operations. The strores are \blue{eventually
+    Consider a collection of data stores and (concurrent) write operations. The stores are \blue{eventually
       consistent} when in lack of updates from a certain moment, all updates to that point are propagated in
     such a way that replicas will have the same data stored (until updates are accepted again).
   \end{block}
 
-  \begin{block}{Srong eventual consistency}
+  \begin{block}{Strong eventual consistency}
     Basic idea: if there are conflicting updates, have a globally determined resolution mechanism (for
     example, using NTP, simply let the ``most recent'' update win). 
   \end{block}
@@ -237,7 +238,7 @@
 \end{slide}
 \subsection{Continuous consistency}
 \begin{slide}{Continuous Consistency}
-  \begin{block}{We can actually talk about a \blue{degree of consistency}}
+  \begin{block}{We can actually talk about a \green{degree of consistency}}
     \begin{itemize}\tightlist
     \item replicas may differ in their \blue{numerical value}
     \item replicas may differ in their relative \blue{staleness}
@@ -274,7 +275,7 @@
   \end{block}
 \end{slide}
 
-\begin{frame}{Granualarit Granularity of Conits Trade-offs}
+\begin{frame}{Granularity of Conits Trade-offs}
 We need to pay attention to the \textbf{granularity} of our Conits:
 The trade-off is fine-grained vs. coarse-grained conits
 \begin{itemize}\tightlist
@@ -296,6 +297,7 @@ We can arrange the consistency models from strongest to weakest:
   \item \textbf{Causal Consistency}: All causally related operations (happens-before via reads/writes or messages) are seen in the same order by everyone
   \item \textbf{Entry Consistency}: Consistency guaranteed only for data protected by a lock
   \item \textbf{Eventual Consistency}: If no new writes, all replicas eventually converge. No ordering or timeliness guarantees
+  \item \textbf{Continuous Consistency}: Replicas may diverge, but consistency is bounded explicitly along continuous metrics (numerical error, order error, and staleness) to trade consistency for performance/availability
 \end{enumerate}
 \end{slide}
 
